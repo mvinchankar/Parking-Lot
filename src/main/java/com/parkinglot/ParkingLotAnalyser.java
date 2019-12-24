@@ -1,8 +1,17 @@
 package com.parkinglot;
 
-public class ParkingLotAnalyser {
+import java.util.HashMap;
+import java.util.Map;
 
-    public boolean allocateEmptySlotToParkVehicles(String vehcilesNamePlate) {
-        return true;
+public class ParkingLotAnalyser {
+    Map<Integer, String> plotList = new HashMap<>();
+
+    public boolean allocateEmptySlotToParkVehicles(String vehicleNamePlate) {
+        if (vehicleNamePlate != null) {
+            plotList.put(1, vehicleNamePlate);
+            return true;
+        }
+        return false;
+
     }
 }
