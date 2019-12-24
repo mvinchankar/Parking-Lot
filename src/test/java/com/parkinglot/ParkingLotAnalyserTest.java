@@ -3,21 +3,25 @@ package com.parkinglot;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ParkingLotAnalyserTest {
+import java.util.ArrayList;
+import java.util.Map;
 
+public class ParkingLotAnalyserTest {
     @Test
-    public void givenParkingPlot_OwnerWillCheckForEmptySlotToParkVehicle() {
+    public void givenParkingPlot_IfDriverWillParkVehicle_ShouldReturnCorrectSlot() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
-        boolean plotToParkVehicles = parkingLotAnalyser.
-                allocateEmptySlotToParkVehicles("MH30 AY 3036");
-        Assert.assertTrue(plotToParkVehicles);
+        Map<String, ArrayList<VehicleDetails>> plotToParkVehicles = parkingLotAnalyser.
+                allocateEmptySlotToParkVehicles(new VehicleDetails
+                        ("MH01 AY 3036", "blue", "12.25"));
+        Assert.assertEquals(1, plotToParkVehicles.size());
     }
 
     @Test
-    public void givenParkingPlot_IfDriverWillParkVehicleInEmptySlot_ShouldReturnTrue() {
+    public void givenParkingPlot_IfSecondDriverWillParkVehicle_ShouldReturnCorrectSlot() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
-        boolean plotToParkVehicles = parkingLotAnalyser.
-                allocateEmptySlotToParkVehicles("MH01 AY 3036");
-        Assert.assertTrue(plotToParkVehicles);
+        Map<String,ArrayList<VehicleDetails>> plotToParkVehicles = parkingLotAnalyser.
+                allocateEmptySlotToParkVehicles(new VehicleDetails
+                        ("MH01 AY 3037","blue","11.25"));
+        Assert.assertEquals( 2,plotToParkVehicles.size());
     }
 }
