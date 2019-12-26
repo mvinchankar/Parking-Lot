@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class ParkingLotAnalyser {
     Map<ParkingType, ArrayList<VehicleDetails>> plotList;
+    ArrayList<VehicleDetails> detailsArrayList = new ArrayList<>(100);
+    int initialParkingSlots = 100;
 
     public ParkingLotAnalyser() {
         this.plotList = new HashMap<>();
@@ -14,12 +16,25 @@ public class ParkingLotAnalyser {
     public Map<ParkingType, ArrayList<VehicleDetails>> allocateEmptySlotToParkVehicles(ParkingType parkingType,
                                                                                        VehicleDetails... details) {
         if (details != null) {
-            plotList.put(parkingType, new ArrayList<VehicleDetails>(100));
+            int remainingSlots = 0;
+            plotList.put(parkingType, detailsArrayList);
             for (VehicleDetails i : details) {
                 plotList.get(parkingType).add(i);
+                remainingSlots = initialParkingSlots - plotList.get(parkingType).size();
             }
+            System.out.println("RemainingSlots:" + remainingSlots);
             return plotList;
         }
         return null;
+    }
+
+    public boolean findVehicleInParkingLot(String numberPlateOfVehicle) {
+        System.out.println(detailsArrayList.size());
+        for (int i = 0; i < detailsArrayList.size(); i++) {
+            if (detailsArrayList.get(i).numberPlateOfVehicle.equals(numberPlateOfVehicle)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

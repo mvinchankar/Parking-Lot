@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.*;
+
 public class ParkingLotAnalyserTest {
 
     Map<ParkingType, ArrayList<VehicleDetails>> slotOccupied;
@@ -24,7 +26,7 @@ public class ParkingLotAnalyserTest {
         slotOccupied = parkingLotAnalyser.
                 allocateEmptySlotToParkVehicles(ParkingType.SMALL, new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()));
-        Assert.assertEquals(1, slotOccupied.get(ParkingType.SMALL).size());
+        assertEquals(1,slotOccupied.get(ParkingType.SMALL).size());
     }
 
     @Test
@@ -34,7 +36,7 @@ public class ParkingLotAnalyserTest {
                 allocateEmptySlotToParkVehicles(ParkingType.HANDICAPPED, new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3037", "blue", new Date()));
-        Assert.assertEquals(2, slotOccupied.get(ParkingType.HANDICAPPED).size());
+        assertEquals(2,slotOccupied.get(ParkingType.HANDICAPPED).size());
     }
 
     @Test
@@ -44,7 +46,7 @@ public class ParkingLotAnalyserTest {
                 allocateEmptySlotToParkVehicles(ParkingType.LARGE, new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3037", "blue", new Date()));
-        Assert.assertEquals(2, slotOccupied.get(ParkingType.LARGE).size());
+        assertEquals(2,slotOccupied.get(ParkingType.LARGE).size());
     }
 
     @Test
@@ -53,11 +55,23 @@ public class ParkingLotAnalyserTest {
         slotOccupied = parkingLotAnalyser.
                 allocateEmptySlotToParkVehicles(ParkingType.LARGE, new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
-                        ("MH01 AY 3037", "blue", new Date()));
-        slotOccupied = parkingLotAnalyser.
-                allocateEmptySlotToParkVehicles(ParkingType.SMALL, new VehicleDetails
+                        ("MH01 AY 3037", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3037", "blue", new Date()));
-        Assert.assertEquals(2, slotOccupied.get(ParkingType.LARGE).size());
+        assertEquals(4,slotOccupied.get(ParkingType.LARGE).size());
+    }
+
+    @Test
+    public void givenParkingLot_IfDriverWantsToUnparkVehicle_ShouldReturnTrue() {
+        ParkingLotAnalyser analyser = new ParkingLotAnalyser();
+        VehicleDetails details = null;
+        slotOccupied = analyser.
+                allocateEmptySlotToParkVehicles(ParkingType.LARGE, new VehicleDetails
+                        ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
+                        ("MH01 AY 3039", "blue", new Date()), new VehicleDetails
+                        ("MH01 AY 3034", "blue", new Date()), new VehicleDetails
+                        ("MH01 AY 3037", "blue", new Date()));
+        boolean vehicleInParkingLot = analyser.findVehicleInParkingLot("MH01 AY 3037");
+        assertTrue(vehicleInParkingLot);
     }
 }
