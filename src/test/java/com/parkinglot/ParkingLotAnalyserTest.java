@@ -28,7 +28,7 @@ public class ParkingLotAnalyserTest {
     }
 
     @Test
-    public void givenParkingPlot_IfMultipleDriverWillParkVehicles_ShouldReturnCorrectSlots() {
+    public void givenParkingPlot_IfMultipleDriverWillParkVehicles_ShouldReturnCorrectSlotsOccupied() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
         slotOccupied = parkingLotAnalyser.
                 allocateEmptySlotToParkVehicles(ParkingType.HANDICAPPED, new VehicleDetails
@@ -38,12 +38,26 @@ public class ParkingLotAnalyserTest {
     }
 
     @Test
-    public void givenParkingPlot_IfMultipleTypeOfParkingInWhichDriverWillParkVehicles_ShouldReturnZeroSlotsForHandicapped() {
+    public void givenParkingPlot_IfLargeTypeOfParkingInWhichDriverWillParkVehicles_ShouldReturnOccupiedSlots() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
         slotOccupied = parkingLotAnalyser.
                 allocateEmptySlotToParkVehicles(ParkingType.LARGE, new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3037", "blue", new Date()));
-        Assert.assertEquals(0, slotOccupied.get(ParkingType.HANDICAPPED).size());
+        Assert.assertEquals(2, slotOccupied.get(ParkingType.LARGE).size());
+    }
+
+    @Test
+    public void givenParkingPlot_IfMultipleTypeOfParkingInWhichDriverWillParkVehicles_ShouldReturnCorrectSlotsOccupied() {
+        ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
+        slotOccupied = parkingLotAnalyser.
+                allocateEmptySlotToParkVehicles(ParkingType.LARGE, new VehicleDetails
+                        ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
+                        ("MH01 AY 3037", "blue", new Date()));
+        slotOccupied = parkingLotAnalyser.
+                allocateEmptySlotToParkVehicles(ParkingType.SMALL, new VehicleDetails
+                        ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
+                        ("MH01 AY 3037", "blue", new Date()));
+        Assert.assertEquals(2, slotOccupied.get(ParkingType.LARGE).size());
     }
 }
