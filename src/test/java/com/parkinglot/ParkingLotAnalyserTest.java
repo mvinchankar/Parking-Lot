@@ -1,31 +1,49 @@
 package com.parkinglot;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLotAnalyserTest {
-    Map<String, ArrayList<VehicleDetails>> plotToParkVehicles;
+
+    Map<ParkingType, ArrayList<VehicleDetails>> slotOccupied;
+
+    @Before
+    public void setUp() {
+        this.slotOccupied = new HashMap<>();
+    }
 
     @Test
     public void givenParkingPlot_IfDriverWillParkVehicle_ShouldReturnCorrectSlot() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
-        Map<String, ArrayList<VehicleDetails>> slotOccupied = parkingLotAnalyser.
-                allocateEmptySlotToParkVehicles(new VehicleDetails
+        slotOccupied = parkingLotAnalyser.
+                allocateEmptySlotToParkVehicles(ParkingType.SMALL, new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()));
-        Assert.assertEquals(1, slotOccupied.get("Normal").size());
+        Assert.assertEquals(1, slotOccupied.get(ParkingType.SMALL).size());
     }
 
     @Test
     public void givenParkingPlot_IfMultipleDriverWillParkVehicles_ShouldReturnCorrectSlots() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
-        Map<String, ArrayList<VehicleDetails>> slotOccupied = parkingLotAnalyser.
-                allocateEmptySlotToParkVehicles(new VehicleDetails
+        slotOccupied = parkingLotAnalyser.
+                allocateEmptySlotToParkVehicles(ParkingType.HANDICAPPED, new VehicleDetails
                         ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3037", "blue", new Date()));
-        Assert.assertEquals(2, slotOccupied.get("Normal").size());
+        Assert.assertEquals(2, slotOccupied.get(ParkingType.HANDICAPPED).size());
+    }
+
+    @Test
+    public void givenParkingPlot_IfMultipleTypeOfParkingInWhichDriverWillParkVehicles_ShouldReturnZeroSlotsForHandicapped() {
+        ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
+        slotOccupied = parkingLotAnalyser.
+                allocateEmptySlotToParkVehicles(ParkingType.LARGE, new VehicleDetails
+                        ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
+                        ("MH01 AY 3037", "blue", new Date()));
+        Assert.assertEquals(0, slotOccupied.get(ParkingType.HANDICAPPED).size());
     }
 }
