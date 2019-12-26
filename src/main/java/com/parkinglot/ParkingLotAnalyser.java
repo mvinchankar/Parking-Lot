@@ -28,10 +28,12 @@ public class ParkingLotAnalyser {
         return null;
     }
 
-    public boolean findVehicleInParkingLot(String numberPlateOfVehicle) {
+    public boolean findVehicleInParkingLotToUnparkVehicle(String numberPlateOfVehicle) {
         System.out.println(detailsArrayList.size());
         for (int i = 0; i < detailsArrayList.size(); i++) {
             if (detailsArrayList.get(i).numberPlateOfVehicle.equals(numberPlateOfVehicle)) {
+                System.out.println("Vehicle Unparked..."+detailsArrayList.get(i).numberPlateOfVehicle);
+                detailsArrayList.remove(i);
                 return true;
             }
         }

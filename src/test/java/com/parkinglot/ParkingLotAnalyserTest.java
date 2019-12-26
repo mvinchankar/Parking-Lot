@@ -1,6 +1,5 @@
 package com.parkinglot;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -71,7 +70,7 @@ public class ParkingLotAnalyserTest {
                         ("MH01 AY 3039", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3034", "blue", new Date()), new VehicleDetails
                         ("MH01 AY 3037", "blue", new Date()));
-        boolean vehicleInParkingLot = analyser.findVehicleInParkingLot("MH01 AY 3037");
+        boolean vehicleInParkingLot = analyser.findVehicleInParkingLotToUnparkVehicle("MH01 AY 3037");
         assertTrue(vehicleInParkingLot);
     }
 }
