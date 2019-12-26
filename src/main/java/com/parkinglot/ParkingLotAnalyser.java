@@ -7,7 +7,7 @@ import java.util.Map;
 public class ParkingLotAnalyser {
     Map<ParkingType, ArrayList<VehicleDetails>> plotList;
     ArrayList<VehicleDetails> detailsArrayList = new ArrayList<>(100);
-    int initialParkingSlots = 100;
+    int initialParkingSlots = 5;
 
     public ParkingLotAnalyser() {
         this.plotList = new HashMap<>();
@@ -19,10 +19,12 @@ public class ParkingLotAnalyser {
             int remainingSlots = 0;
             plotList.put(parkingType, detailsArrayList);
             for (VehicleDetails i : details) {
-                plotList.get(parkingType).add(i);
-                remainingSlots = initialParkingSlots - plotList.get(parkingType).size();
+                if (detailsArrayList.size() != initialParkingSlots) {
+                    plotList.get(parkingType).add(i);
+                    remainingSlots = initialParkingSlots - plotList.get(parkingType).size();
+                }
             }
-            System.out.println("RemainingSlots:" + remainingSlots);
+            System.out.println("Parking Lot Fulled!!!!! Sorry For Inconvenience");
             return plotList;
         }
         return null;
@@ -32,7 +34,7 @@ public class ParkingLotAnalyser {
         System.out.println(detailsArrayList.size());
         for (int i = 0; i < detailsArrayList.size(); i++) {
             if (detailsArrayList.get(i).numberPlateOfVehicle.equals(numberPlateOfVehicle)) {
-                System.out.println("Vehicle Unparked..."+detailsArrayList.get(i).numberPlateOfVehicle);
+                System.out.println("Vehicle Unparked..." + detailsArrayList.get(i).numberPlateOfVehicle);
                 detailsArrayList.remove(i);
                 return true;
             }
