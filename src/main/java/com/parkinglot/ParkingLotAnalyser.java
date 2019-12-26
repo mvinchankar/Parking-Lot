@@ -14,24 +14,24 @@ public class ParkingLotAnalyser {
     }
 
     public Map<ParkingType, ArrayList<VehicleDetails>> allocateEmptySlotToParkVehicles(ParkingType parkingType,
-                                                                                       VehicleDetails... details) {
+                                                                                       VehicleDetails... details) throws ParkingLotException {
         if (details != null) {
             int remainingSlots = 0;
             plotList.put(parkingType, detailsArrayList);
             for (VehicleDetails i : details) {
                 if (detailsArrayList.size() != initialParkingSlots) {
                     plotList.get(parkingType).add(i);
-                    remainingSlots = initialParkingSlots - plotList.get(parkingType).size();
+                } else {
+                    throw new ParkingLotException("PARKING LOT FULLED!!!!!!!!",
+                            ParkingLotException.ExceptionType.PARKING_LOT_FULLED);
                 }
             }
-            System.out.println("Parking Lot Fulled!!!!! Sorry For Inconvenience");
             return plotList;
         }
         return null;
     }
 
     public boolean findVehicleInParkingLotToUnparkVehicle(String numberPlateOfVehicle) {
-        System.out.println(detailsArrayList.size());
         for (int i = 0; i < detailsArrayList.size(); i++) {
             if (detailsArrayList.get(i).numberPlateOfVehicle.equals(numberPlateOfVehicle)) {
                 System.out.println("Vehicle Unparked..." + detailsArrayList.get(i).numberPlateOfVehicle);
