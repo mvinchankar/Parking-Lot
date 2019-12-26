@@ -9,6 +9,6 @@ public class ParkingLotException extends Exception {
     }
 
     enum ExceptionType {
-        PARKING_LOT_FULLED;
+        PARKING_LOT_FULLED, VEHICLE_DETAILS_NOT_MENTIONED;;
     }
 }

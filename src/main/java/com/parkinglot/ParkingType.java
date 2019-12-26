@@ -1,9 +1,7 @@
 package com.parkinglot;
 
 public enum ParkingType {
-    HANDICAPPED(34),
-    SMALL(34),
-    LARGE(32);
+    VEHICLE(100);
 
     private final int capacity;
 

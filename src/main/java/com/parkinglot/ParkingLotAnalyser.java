@@ -16,7 +16,6 @@ public class ParkingLotAnalyser {
     public Map<ParkingType, ArrayList<VehicleDetails>> allocateEmptySlotToParkVehicles(ParkingType parkingType,
                                                                                        VehicleDetails... details) throws ParkingLotException {
         if (details != null) {
-            int remainingSlots = 0;
             plotList.put(parkingType, detailsArrayList);
             for (VehicleDetails i : details) {
                 if (detailsArrayList.size() != initialParkingSlots) {
@@ -28,7 +27,8 @@ public class ParkingLotAnalyser {
             }
             return plotList;
         }
-        return null;
+        throw new ParkingLotException("PLEASE MENTION VEHICLE DETAILS!!!!",
+                ParkingLotException.ExceptionType.VEHICLE_DETAILS_NOT_MENTIONED);
     }
 
     public boolean findVehicleInParkingLotToUnparkVehicle(String numberPlateOfVehicle) {
