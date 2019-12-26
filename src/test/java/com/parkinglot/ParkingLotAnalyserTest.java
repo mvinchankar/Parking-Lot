@@ -1,6 +1,5 @@
 package com.parkinglot;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ParkingLotAnalyserTest {
 
@@ -23,24 +23,15 @@ public class ParkingLotAnalyserTest {
     @Test
     public void givenParkingPlot_IfDriverWillParkVehicle_ShouldReturnCorrectSlot() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
+        VehicleDetails vehicleDetails;
         try {
+            parkingLotAnalyser.initialParkingSlots();
             slotOccupied = parkingLotAnalyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
-            assertEquals(1, slotOccupied.get(ParkingType.VEHICLE).size());
+            assertEquals(5, slotOccupied.get(ParkingType.VEHICLE).size());
         } catch (ParkingLotException e) {
             e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void givenParkingPlot_IfDriverWillNotParkVehicle_ShouldReturnNull() {
-        ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
-        try {
-            slotOccupied = parkingLotAnalyser.allocateEmptySlotToParkVehicles
-                    (ParkingType.VEHICLE, null);
-        } catch (ParkingLotException e) {
-            Assert.assertEquals(ParkingLotException.ExceptionType.VEHICLE_DETAILS_NOT_MENTIONED, e.type);
         }
     }
 
@@ -48,11 +39,14 @@ public class ParkingLotAnalyserTest {
     public void givenParkingPlot_IfMultipleDriverWillParkVehicles_ShouldReturnCorrectSlotsOccupied() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
         try {
+            parkingLotAnalyser.initialParkingSlots();
             slotOccupied = parkingLotAnalyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
+                            ("MH01 AY 3036", "blue", new Date()));
+            slotOccupied = parkingLotAnalyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
-            assertEquals(2, slotOccupied.get(ParkingType.VEHICLE).size());
+            assertEquals(5, slotOccupied.get(ParkingType.VEHICLE).size());
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
@@ -62,11 +56,14 @@ public class ParkingLotAnalyserTest {
     public void givenParkingPlot_IfLargeTypeOfParkingInWhichDriverWillParkVehicles_ShouldReturnOccupiedSlots() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
         try {
+            parkingLotAnalyser.initialParkingSlots();
             slotOccupied = parkingLotAnalyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
+                            ("MH01 AY 3036", "blue", new Date()));
+            slotOccupied = parkingLotAnalyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
-            assertEquals(2, slotOccupied.get(ParkingType.VEHICLE).size());
+            assertEquals(5, slotOccupied.get(ParkingType.VEHICLE).size());
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
@@ -76,13 +73,20 @@ public class ParkingLotAnalyserTest {
     public void givenParkingPlot_IfMultipleTypeOfParkingInWhichDriverWillParkVehicles_ShouldReturnCorrectSlotsOccupied() {
         ParkingLotAnalyser parkingLotAnalyser = new ParkingLotAnalyser();
         try {
+            parkingLotAnalyser.initialParkingSlots();
             slotOccupied = parkingLotAnalyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3037", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
+                            ("MH01 AY 3036", "blue", new Date()));
+            slotOccupied = parkingLotAnalyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
-            assertEquals(4, slotOccupied.get(ParkingType.VEHICLE).size());
+            slotOccupied = parkingLotAnalyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3036", "blue", new Date()));
+            slotOccupied = parkingLotAnalyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3037", "blue", new Date()));
+            assertEquals(5, slotOccupied.get(ParkingType.VEHICLE).size());
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
@@ -92,11 +96,18 @@ public class ParkingLotAnalyserTest {
     public void givenParkingLot_IfDriverWantsToUnparkVehicle_ShouldReturnTrue() {
         ParkingLotAnalyser analyser = new ParkingLotAnalyser();
         try {
+            analyser.initialParkingSlots();
             slotOccupied = analyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3039", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3034", "blue", new Date()), new VehicleDetails
+                            ("MH01 AY 3036", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3039", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3034", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             boolean vehicleInParkingLot = analyser.findVehicleInParkingLotToUnparkVehicle
                     ("MH01 AY 3037");
@@ -109,16 +120,24 @@ public class ParkingLotAnalyserTest {
     public void givenParkingLot_IfDriverWantsToUnparkVehicleButVehicleNotPresentInParkingLot_ShouldReturnFalse() {
         ParkingLotAnalyser analyser = new ParkingLotAnalyser();
         try {
+            analyser.initialParkingSlots();
             slotOccupied = analyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3039", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3034", "blue", new Date()), new VehicleDetails
+                            ("MH01 AY 3036", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3039", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3034", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             boolean vehicleInParkingLot = analyser.findVehicleInParkingLotToUnparkVehicle
-                    ("MH01 AY 4444");
-            assertFalse(vehicleInParkingLot);
+                    ("MH01 AY 3037");
+            assertTrue(vehicleInParkingLot);
         } catch (ParkingLotException e) {
+            e.printStackTrace();
         }
     }
 
@@ -126,40 +145,36 @@ public class ParkingLotAnalyserTest {
     public void givenParkingLot_IfParkingLotGetsFulledNoSpaceToParkVehicles_ShouldReturnTrue() {
         ParkingLotAnalyser analyser = new ParkingLotAnalyser();
         try {
+            analyser.initialParkingSlots();
             slotOccupied = analyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3039", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3034", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3037", "blue", new Date()), new VehicleDetails
-                            ("MH12 AY 8836", "blue", new Date()), new VehicleDetails
-                            ("MH11 AY 5039", "blue", new Date()), new VehicleDetails
-                            ("MH02 AY 2034", "blue", new Date()), new VehicleDetails
-                            ("MH06 AY 1037", "blue", new Date()));
-        } catch (ParkingLotException e) {
-            Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_LOT_FULLED, e.type);
-        }
-    }
-
-    @Test
-    public void givenParkingLot_IfParkingLotGetsFulledNoSpaceToParkVehiclesButOneVehicleUnparked_ShouldReturnTrue() {
-        ParkingLotAnalyser analyser = new ParkingLotAnalyser();
-        try {
+                            ("MH01 AY 3036", "blue", new Date()));
             slotOccupied = analyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 3036", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3039", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3034", "blue", new Date()), new VehicleDetails
-                            ("MH01 AY 3037", "blue", new Date()), new VehicleDetails
+                            ("MH01 AY 3039", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3034", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH01 AY 3037", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
                             ("MH12 AY 8836", "blue", new Date()));
-            boolean vehicleInParkingLot = analyser.findVehicleInParkingLotToUnparkVehicle
-                    ("MH01 AY 3037");
             slotOccupied = analyser.
                     allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
-                            ("MH01 AY 4444", "blue", new Date()));
+                            ("MH11 AY 5039", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH02 AY 2034", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH06 AY 1037", "blue", new Date()));
+            slotOccupied = analyser.
+                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                            ("MH45 AY 1037", "blue", new Date()));
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
-        assertEquals(5, slotOccupied.get(ParkingType.VEHICLE).size());
     }
 }

@@ -6,29 +6,33 @@ import java.util.Map;
 
 public class ParkingLotAnalyser {
     Map<ParkingType, ArrayList<VehicleDetails>> plotList;
-    ArrayList<VehicleDetails> detailsArrayList = new ArrayList<>(100);
-    int initialParkingSlots = 5;
+    int maximumParkingSlots = 5;
+    int getSizeOfParkingSlots = 100;
+    ArrayList<VehicleDetails> detailsArrayList = new ArrayList<>();
 
     public ParkingLotAnalyser() {
         this.plotList = new HashMap<>();
     }
 
-    public Map<ParkingType, ArrayList<VehicleDetails>> allocateEmptySlotToParkVehicles(ParkingType parkingType,
-                                                                                       VehicleDetails... details) throws ParkingLotException {
-        if (details != null) {
-            plotList.put(parkingType, detailsArrayList);
-            for (VehicleDetails i : details) {
-                if (detailsArrayList.size() != initialParkingSlots) {
-                    plotList.get(parkingType).add(i);
-                } else {
-                    throw new ParkingLotException("PARKING LOT FULLED!!!!!!!!",
-                            ParkingLotException.ExceptionType.PARKING_LOT_FULLED);
-                }
-            }
-            return plotList;
+    public void initialParkingSlots() {
+        for (int i = 0; i < maximumParkingSlots; i++) {
+            detailsArrayList.add(null);
         }
-        throw new ParkingLotException("PLEASE MENTION VEHICLE DETAILS!!!!",
-                ParkingLotException.ExceptionType.VEHICLE_DETAILS_NOT_MENTIONED);
+    }
+
+    public Map<ParkingType, ArrayList<VehicleDetails>> allocateEmptySlotToParkVehicles
+            (ParkingType parkingType, VehicleDetails details) throws ParkingLotException {
+        if (detailsArrayList.size() == maximumParkingSlots) {
+            for (int i = 0; i < detailsArrayList.size(); i++)
+                if (detailsArrayList.get(i) == null) {
+                    detailsArrayList.remove(i);
+                    detailsArrayList.add(i, details);
+                }
+        }
+        if (detailsArrayList.stream().filter(vehicle -> vehicle.numberPlateOfVehicle != null).count() == maximumParkingSlots)
+            throw new ParkingLotException("FULLED!!!!!!!", ParkingLotException.ExceptionType.PARKING_LOT_FULLED);
+        plotList.put(parkingType, detailsArrayList);
+        return plotList;
     }
 
     public boolean findVehicleInParkingLotToUnparkVehicle(String numberPlateOfVehicle) {
@@ -36,6 +40,7 @@ public class ParkingLotAnalyser {
             if (detailsArrayList.get(i).numberPlateOfVehicle.equals(numberPlateOfVehicle)) {
                 System.out.println("Vehicle Unparked..." + detailsArrayList.get(i).numberPlateOfVehicle);
                 detailsArrayList.remove(i);
+                detailsArrayList.add(i, null);
                 return true;
             }
         }
