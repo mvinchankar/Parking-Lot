@@ -23,8 +23,7 @@ public class ParkingLotAnalyser {
             (ParkingType parkingType, VehicleDetails details) throws ParkingLotException {
         for (int i = 0; i < detailsArrayList.size(); i++)
             if (detailsArrayList.get(i) == null) {
-                detailsArrayList.remove(i);
-                detailsArrayList.add(i, details);
+                detailsArrayList.set(i, details);
                 plotList.put(parkingType, detailsArrayList);
                 return true;
             }
@@ -36,8 +35,7 @@ public class ParkingLotAnalyser {
             try {
                 if (detailsArrayList.get(i).numberPlateOfVehicle.equals(numberPlateOfVehicle)) {
                     System.out.println("Vehicle Unparked..." + detailsArrayList.get(i).numberPlateOfVehicle);
-                    detailsArrayList.remove(i);
-                    detailsArrayList.add(i, null);
+                    detailsArrayList.set(i, null);
                     return true;
                 }
             } catch (NullPointerException e) {

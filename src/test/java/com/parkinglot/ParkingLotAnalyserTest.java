@@ -27,7 +27,7 @@ public class ParkingLotAnalyserTest {
         try {
             parkingLotAnalyser.initialParkingSlots();
             boolean slotOccupied = parkingLotAnalyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             assertTrue(slotOccupied);
         } catch (ParkingLotException e) {
@@ -41,10 +41,10 @@ public class ParkingLotAnalyserTest {
         try {
             parkingLotAnalyser.initialParkingSlots();
             boolean slotOccupied = parkingLotAnalyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             boolean slotOccupied1 = parkingLotAnalyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             assertTrue(slotOccupied);
             assertTrue(slotOccupied1);
@@ -59,16 +59,16 @@ public class ParkingLotAnalyserTest {
         try {
             parkingLotAnalyser.initialParkingSlots();
             boolean slotOccupied = parkingLotAnalyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             boolean slotOccupied1 = parkingLotAnalyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             boolean slotOccupied2 = parkingLotAnalyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             boolean slotOccupied3 = parkingLotAnalyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             assertTrue(slotOccupied);
             assertTrue(slotOccupied1);
@@ -85,16 +85,16 @@ public class ParkingLotAnalyserTest {
         try {
             analyser.initialParkingSlots();
             boolean slotOccupied = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             boolean slotOccupied1 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3039", "blue", new Date()));
             boolean slotOccupied2 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3034", "blue", new Date()));
             boolean slotOccupied3 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             boolean vehicleInParkingLot = analyser.findVehicleInParkingLotToUnparkVehicle
                     ("MH01 AY 3037");
@@ -109,16 +109,16 @@ public class ParkingLotAnalyserTest {
         try {
             analyser.initialParkingSlots();
             boolean slotOccupied = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             boolean slotOccupied1 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3039", "blue", new Date()));
             boolean slotOccupied2 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3034", "blue", new Date()));
             boolean slotOccupied3 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             boolean vehicleInParkingLot = analyser.findVehicleInParkingLotToUnparkVehicle
                     ("MH01 AY 4444");
@@ -133,31 +133,31 @@ public class ParkingLotAnalyserTest {
         try {
             analyser.initialParkingSlots();
             boolean slotOccupied = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             boolean slotOccupied1 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3039", "blue", new Date()));
             boolean slotOccupied2 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3034", "blue", new Date()));
             boolean slotOccupied3 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             boolean slotOccupied4 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH12 AY 8836", "blue", new Date()));
             boolean slotOccupied5 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH11 AY 5039", "blue", new Date()));
             boolean slotOccupied6 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH02 AY 2034", "blue", new Date()));
             boolean slotOccupied7 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH06 AY 1037", "blue", new Date()));
             boolean slotOccupied8 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH45 AY 1037", "blue", new Date()));
         } catch (ParkingLotException e) {
             Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_LOT_FULLED, e.type);
@@ -170,22 +170,22 @@ public class ParkingLotAnalyserTest {
         try {
             analyser.initialParkingSlots();
             boolean slotOccupied = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3036", "blue", new Date()));
             boolean slotOccupied1 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3039", "blue", new Date()));
             boolean slotOccupied2 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3034", "blue", new Date()));
             boolean slotOccupied3 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH01 AY 3037", "blue", new Date()));
             boolean slotOccupied4 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH12 AY 8836", "blue", new Date()));
             boolean slotOccupied5 = analyser.
-                    allocateEmptySlotToParkVehicles(ParkingType.VEHICLE, new VehicleDetails
+                    allocateEmptySlotToParkVehicles(ParkingType.NORMAL, new VehicleDetails
                             ("MH11 AY 5039", "blue", new Date()));
         } catch (ParkingLotException e) {
             Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_LOT_FULLED, e.type);
